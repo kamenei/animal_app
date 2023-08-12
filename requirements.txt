@@ -10,5 +10,5 @@ Pillow==9.4.0
 pytorch-lightning==1.9.5
 torch==1.13.1
 torchvision==0.14.1
-Werkzeug==2.3.6
+Werkzeug==2.2.3
 gunicorn==20.1.0
