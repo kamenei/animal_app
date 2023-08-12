@@ -7,7 +7,7 @@ GitPython==3.1.31
 itsdangerous==2.1.2
 Jinja2==3.1.2
 Pillow==9.4.0
-pytorch-lightning==2.0.6
+pytorch-lightning==1.9.5
 torch==2.0.1
 torchvision==0.15.2
 Werkzeug==2.3.6
