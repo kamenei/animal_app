@@ -7,7 +7,7 @@ from PIL import Image
 import base64
 
 # プレフィックス"model."を取り除く
-state_dict = torch.load('./dog_cat6.pt', map_location=torch.device('cpu'))
+state_dict = torch.load('.src/dog_cat6.pt', map_location=torch.device('cpu'))
 
 net = Net().cpu().eval()
 net.load_state_dict(state_dict)
