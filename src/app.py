@@ -6,13 +6,11 @@ import io
 from PIL import Image
 import base64
 
-# プレフィックス"model."を取り除く
-state_dict = torch.load('./dog_cat6.pt', map_location=torch.device('cpu'))
-
+#  学習済みモデルの重み（dog_cat.pt）を読み込み
+state_dict = torch.load('./src/dog_cat7.pt', map_location=torch.device('cpu'))
 net = Net().cpu().eval()
 net.load_state_dict(state_dict)
-    # # 学習済みモデルの重み（dog_cat.pt）を読み込み
-#net.load_state_dict(torch.load('./src/dog_cat.pt', map_location=torch.device('cpu')))
+
 
 # 学習済みモデルをもとに推論する
 def predict(img):

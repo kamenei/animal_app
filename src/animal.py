@@ -1,4 +1,3 @@
-#animal.py
 # 必要なモジュールのインポート
 from torchvision import transforms
 import pytorch_lightning as pl
@@ -21,10 +20,10 @@ class Net(pl.LightningModule):
         super().__init__()
 
         # 学習時に使ったのと同じ学習済みモデルを定義
-        self.model = resnet50(weights=None)  # Note the change here from self.feature to self.model
-        num_ftrs = self.model.fc.in_features  # Modified this line
-        self.model.fc = nn.Linear(num_ftrs, 2)  # Modified this line
+        self.model = resnet50(weights=None)  
+        num_ftrs = self.model.fc.in_features  
+        self.model.fc = nn.Linear(num_ftrs, 2)  
 
     def forward(self, x):
         # 学習時に使ったのと同じ順伝播
-        return self.model(x)  # Modified this line
+        return self.model(x)  
