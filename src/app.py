@@ -6,10 +6,21 @@ import io
 from PIL import Image
 import base64
 
+# グローバル変数として初期化
+net = None
+
+# Lazy Loadingを行う関数
+def load_model():
+    global net
+    if net is None:
+        state_dict = torch.load('./dog_cat7.pt', map_location=torch.device('cpu'))
+        net = Net().cpu().eval()
+        net.load_state_dict(state_dict)
+
 # 学習済みモデルをもとに推論する
 def predict(img):
-    # ネットワークの準備
-    #　データの前処理
+    # モデルがロードされているかを確認
+    load_model()
     img = transform(img)
     img =img.unsqueeze(0) # 1次元増やす
     #　推論
@@ -23,19 +34,9 @@ def getName(label):
     elif label==1:
         return '犬'
 
-# Flask のインスタンスを作成
-def create_app():
-    app = Flask(__name__)
-    
-    # モデルのロード
-    state_dict = torch.load('./dog_cat7.pt', map_location=torch.device('cpu'))
-    global net
-    net = Net().cpu().eval()
-    net.load_state_dict(state_dict)
-    
-    return app
 
-app = create_app()
+# Flask のインスタンスを作成
+app = Flask(__name__)
 
 # アップロードされる拡張子の制限
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'gif', 'jpeg'])
