@@ -6,12 +6,6 @@ import io
 from PIL import Image
 import base64
 
-#  学習済みモデルの重み（dog_cat.pt）を読み込み
-state_dict = torch.load('./src/dog_cat7.pt', map_location=torch.device('cpu'))
-net = Net().cpu().eval()
-net.load_state_dict(state_dict)
-
-
 # 学習済みモデルをもとに推論する
 def predict(img):
     # ネットワークの準備
@@ -72,7 +66,13 @@ def predicts():
     elif request.method == 'GET':
         return render_template('index.html')
 
+#  学習済みモデルの重み（dog_cat.pt）を読み込み
+state_dict = torch.load('./src/dog_cat7.pt', map_location=torch.device('cpu'))
+net = Net().cpu().eval()
+net.load_state_dict(state_dict)
 
 # アプリケーションの実行の定義
 if __name__ == '__main__':
     app.run(debug=True)
+
+
