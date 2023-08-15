@@ -24,7 +24,18 @@ def getName(label):
         return '犬'
 
 # Flask のインスタンスを作成
-app = Flask(__name__)
+def create_app():
+    app = Flask(__name__)
+    
+    # モデルのロード
+    state_dict = torch.load('./dog_cat7.pt', map_location=torch.device('cpu'))
+    global net
+    net = Net().cpu().eval()
+    net.load_state_dict(state_dict)
+    
+    return app
+
+app = create_app()
 
 # アップロードされる拡張子の制限
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'gif', 'jpeg'])
@@ -65,11 +76,6 @@ def predicts():
     # GET メソッドの定義
     elif request.method == 'GET':
         return render_template('index.html')
-
-#  学習済みモデルの重み（dog_cat.pt）を読み込み
-state_dict = torch.load('./dog_cat7.pt', map_location=torch.device('cpu'))
-net = Net().cpu().eval()
-net.load_state_dict(state_dict)
 
 # アプリケーションの実行の定義
 if __name__ == '__main__':
