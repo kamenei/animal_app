@@ -67,7 +67,7 @@ def predicts():
         return render_template('index.html')
 
 #  学習済みモデルの重み（dog_cat.pt）を読み込み
-state_dict = torch.load('./src/dog_cat7.pt', map_location=torch.device('cpu'))
+state_dict = torch.load('./dog_cat7.pt', map_location=torch.device('cpu'))
 net = Net().cpu().eval()
 net.load_state_dict(state_dict)
 
